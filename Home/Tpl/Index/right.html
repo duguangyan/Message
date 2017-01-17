@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<title>right</title>
 		<script type="text/javascript">
-			 window.parent.frames[ "leftTree"].location.reload();  
+			 window.parent.frames[ "left"].location.reload();  
 		</script>
 	</head>
 	<body>
