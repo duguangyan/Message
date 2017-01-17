@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>left</title>
+	</head>
+	<body>
+		<volist name="arr" id='vo'>
+			留言题目：<{$vo.title}>   <br/>
+			留言内容：<{$vo.content}> <br/>
+			留言时间: <{$vo.time|date='Y-m-d H:i:s',###}>    <br/>
+			留言人　：<{$vo.username}>     <br>
+			附件名　：<{$vo.filename}><br>
+			<img src="__PUBLIC__/Uploads/<{$vo.filename}>"/>
+			<hr>
+		</volist>
+		<{$show}>
+	</body>
+</html>

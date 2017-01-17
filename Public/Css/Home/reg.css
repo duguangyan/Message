@@ -1,0 +1,4 @@
+form{width: 350px; margin:  0 auto;}
+input{ margin-top: 10px;width: 120px; height: 26px;}
+form img{ position: relative; top: 11px; cursor: pointer;}
+input[type="radio"]{width: 20px; margin-right: 5px; position: relative;top: 8px;}

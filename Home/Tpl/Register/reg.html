@@ -1,0 +1,81 @@
+<taglib name='Message' />
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>注册</title>
+		<load href="__PUBLIC__/Css/basic.css" />
+		<load href="__PUBLIC__/Css/Home/reg.css" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var error = new Array();
+				$('input[name="username"]').blur(function(){
+					var _this = $(this);
+					var username = $(this).val();
+					if(_this.val()==''||_this.val()==null){
+						_this.next().html('请填写用户名');
+						_this.next().css({'color':'red'});
+						return false;
+					}
+					$.get('__URL__/checkName',{'username':username},function(data){
+						//alert(typeof data);
+//						_this.next().html(data);
+						if(data==1){
+							error['username']=1;
+							_this.next().html('用户名已注册');
+							_this.next().css({'color':'red'});
+						}else{
+							error['username']=0;
+							_this.next().html('用户名可以注册');
+							_this.next().css({'color':'green'});
+						}
+						
+					})
+				});
+				//提交表单
+				$(".doreg").click(function(){
+					if($('input[name="password"]').val()==""||$('input[name="repassword"]').val()==''){
+						return false;
+					}
+					
+					if(error['username']==1){
+						return false;
+					}else{
+						
+						$('form[name="myForm"]').submit();
+					}
+					
+				});
+				
+				//验证密码是否一致
+				$("input[name='repassword']").blur(function(){
+					
+					if($(this).val() != $(this).prev().prev().val()){
+						 $(this).next().html('输入的密码不一致!');
+						 $(this).next().css({'color':'red'});
+					}else{
+						
+						$(this).next().html('输入的密码正确!');
+						$(this).next().css({'color':'green'});
+					}
+				});
+				
+				
+			})
+		</script>
+	</head>
+	<body>
+		<form action="__URL__/doreg" method="post" name='myForm'>
+			用  户  名：<input type="text" name='username'><span></span><br/>
+			密　　码：<input type="password" name="password"><br/>
+			确认密码：<input type="password" name="repassword"><span></span><br/>
+			性　　别:	<input type="radio" name="sex"  value="1" /> 男  
+					<input type="radio" name="sex"  value="0" /> 女 <br/>
+			验  证  码：<input type="text" name='code'>
+			<Message:code width='50' height='30' />
+			<!--<img  src="__APP__/Public/code?w=50&h=30" onclick="this.src=this.src+'?v='+Math.random()">--><br/>
+			<input class="doreg" type="button"   value="注册" /><input type="reset" value="重置" />
+		</form>
+	</body>
+</html>
